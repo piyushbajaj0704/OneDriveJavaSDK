@@ -1,9 +1,9 @@
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>de.tuberlin</groupId>
-	<artifactId>onedrivesdk</artifactId>
-    <version>0.0.4-SNAPSHOT</version>
+	<groupId>com.github.onedrive</groupId>
+	<artifactId>business</artifactId>
+    <version>0.0.3-SNAPSHOT</version>
 
 	<properties>
 		<!-- github server corresponds to entry in ~/.m2/settings.xml -->
@@ -28,6 +28,11 @@
 					<source>1.7</source>
 					<target>1.7</target>
 				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-site-plugin</artifactId>
+				<version>3.7.1</version>
 			</plugin>
 			<plugin>
 				<artifactId>maven-assembly-plugin</artifactId>
@@ -62,7 +67,7 @@
 						<branch>refs/heads/mvn-repo</branch>                       <!-- remote branch name -->
 						<includes><include>**/*</include></includes>
 						<repositoryName>onedrivejavasdk</repositoryName>      <!-- github repo name -->
-						<repositoryOwner>tawalaya</repositoryOwner>    <!-- github username  -->
+						<repositoryOwner>piyushbajaj0704</repositoryOwner>    <!-- github username  -->
 					</configuration>
 					<executions>
 						<!-- run site-maven-plugin's 'site' target as part of the build's normal 'deploy' phase -->
@@ -74,7 +79,15 @@
 						</execution>
 					</executions>
 				</plugin>
-			</plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>8</source>
+					<target>8</target>
+				</configuration>
+			</plugin>
+		</plugins>
 	</build>
 
 	<dependencies>
@@ -122,6 +135,21 @@
 			<groupId>org.apache.logging.log4j</groupId>
 			<artifactId>log4j-core</artifactId>
 			<version>2.3</version>
+		</dependency>
+		<dependency>
+			<groupId>com.github.spullara.mustache.java</groupId>
+			<artifactId>compiler</artifactId>
+			<version>0.9.6</version>
+		</dependency>
+		<dependency>
+			<groupId>org.zwobble.mammoth</groupId>
+			<artifactId>mammoth</artifactId>
+			<version>1.4.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.jsoup</groupId>
+			<artifactId>jsoup</artifactId>
+			<version>1.12.1</version>
 		</dependency>
 	</dependencies>
 
