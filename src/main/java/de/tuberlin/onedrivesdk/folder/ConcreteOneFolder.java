@@ -79,11 +79,6 @@ public class ConcreteOneFolder extends OneItem implements OneFolder {
     }
 
     @Override
-    public OneFolder createSubscription() throws IOException, OneDriveException {
-        return api.createSubscription();
-    }
-
-    @Override
     public int getChildCount() {
         return this.folder.childCount;
     }

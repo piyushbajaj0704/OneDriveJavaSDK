@@ -8,7 +8,6 @@ import de.tuberlin.onedrivesdk.OneDriveException;
 import de.tuberlin.onedrivesdk.OneDriveSDK;
 import de.tuberlin.onedrivesdk.common.OneDriveScope;
 import de.tuberlin.onedrivesdk.common.OneItem;
-import de.tuberlin.onedrivesdk.downloadFile.OneDownloadFile;
 import de.tuberlin.onedrivesdk.file.OneFile;
 import de.tuberlin.onedrivesdk.folder.OneFolder;
 import de.tuberlin.onedrivesdk.networking.OneDriveAuthenticationException;
@@ -68,7 +67,7 @@ public class ConsoleClient {
                 BufferedReader bs = new BufferedReader(new InputStreamReader(s.getInputStream()));
                 String line;
                 while ((line = bs.readLine()) != null) {
-//                    Matcher m = Pattern.compile("\\?code=([^ ]+) HTTP").matcher(line); PIYUSHBAJAJ
+//                    Matcher m = Pattern.compile("\\?code=([^ ]+) HTTP").matcher(line);
                     Matcher m = Pattern.compile("\\?code=([^ &]+)").matcher(line);
                     if (m.find()) {
                         api.authenticate(m.group(1));
@@ -90,6 +89,7 @@ public class ConsoleClient {
 
         System.out.println(currentFolder.getName());
         api.startSessionAutoRefresh();
+
     }
 
     private static void openWebpage(URI uri) {
@@ -108,10 +108,11 @@ public class ConsoleClient {
     }
 
     public static void main(String[] args) throws IOException, InterruptedException, OneDriveException {
-            ShellFactory.createConsoleShell("OneDrive",
-                    "To help command-name",
-                    new ConsoleClient()).commandLoop();
-        }
+        ShellFactory.createConsoleShell("OneDrive",
+                        "To list all available commands enter ?list or ?list-all, the latter will also show you system commands.\nTo get detailed info on a command enter ?help command-name",
+                        new ConsoleClient()).commandLoop();
+
+    }
 
     private static String printCurrentFolder() {
         if (currentFolder != null) {

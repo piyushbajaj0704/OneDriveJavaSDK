@@ -90,14 +90,6 @@ public class ConcreteOneDriveSDKTest {
         Assert.assertEquals(drives.get(0).getDriveType(), "personal");
     }
 
-    @Test // PIYUSH BAJAJ
-    public void testSync() throws IOException, OneDriveException {
-        OneDriveSDK api = this.connect();
-        List<OneDrive> delta = api.sync();
-        Assert.assertTrue(delta.size() == 1);
-        //Assert.assertEquals(delta.get(0).getDriveType(), "personal");
-    }
-
     @Test
     public void testGetDefaultDrive() throws IOException, OneDriveException {
         OneDriveSDK api = this.connect();
@@ -242,7 +234,7 @@ public class ConcreteOneDriveSDKTest {
     @Test
     public void testCreateAndDeleteFolder() throws IOException, OneDriveException {
         String folderName = "TestFolder";
-        String path = "/Pictures";
+        String path = "/IntegrationTesting/FolderForFolderCreation";
 
         OneDriveSDK api = this.connect();
         OneFolder targetFolder = api.getFolderByPath(path);
@@ -269,8 +261,9 @@ public class ConcreteOneDriveSDKTest {
     }
     @Test
     public void testRefresh() throws IOException, OneDriveException {
-        String folderName = "Saved%20Pictures";
-        String path = "/Pictures";
+
+        String folderName = "TestFolder";
+        String path = "/IntegrationTesting/FolderForFolderCreation";
 
         OneDriveSDK api = this.connect();
         OneFolder targetFolder = api.getFolderByPath(path);
@@ -296,23 +289,6 @@ public class ConcreteOneDriveSDKTest {
 
         createdFolder.delete();
     }
-
-
-    @Test  // PIYUSH BAJAJ
-    public void testSubscription() throws IOException, OneDriveException {
-        String folderName = "Saved%20Pictures";
-        String path = "/";
-
-        OneDriveSDK api = this.connect();
-        OneFolder targetFolder = api.getFolderByPath(path);
-
-        OneFolder createdFolder = targetFolder.createSubscription();
-
-        //Assert.assertTrue(refreshFolder.getLastRefresh() > targetFolder.getLastRefresh());
-
-        createdFolder.delete();
-    }
-
 
     @Test
     public void testDeleteFile() throws Exception {

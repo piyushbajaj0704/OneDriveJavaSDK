@@ -35,8 +35,9 @@ public class ConcreteOneDriveSDK implements OneDriveSDK {
     private static final Logger logger = LogManager.getLogger(OneDriveSession.class);
     private static final Gson gson = new Gson();
 
-//    private String baseUrl = "https://api.onedrive.com/v1.0/";   //PIYUSH BAJAJ
+//    private String baseUrl = "https://api.onedrive.com/v1.0/";
     private String baseUrl = "https://graph.microsoft.com/v1.0/";
+
     private OneDriveSession session;
 
     /**
@@ -88,28 +89,6 @@ public class ConcreteOneDriveSDK implements OneDriveSDK {
 
         return drives;
     }
-
-    //@Override  // PIYUSH BAJAJ
-    public List<OneDrive> sync() throws IOException, OneDriveException {
-        String requestURL = "drive/root/delta";
-        PreparedRequest request = new PreparedRequest(requestURL, PreparedRequestMethod.GET);
-        String json = this.makeRequest(request).getBodyAsString();
-        System.out.println(json);
-
-        List<OneDrive> delta = null;
-        try {
-            delta = (List<OneDrive>) ConcreteOneDrive.fromJSON(json);
-        } catch (ParseException e) {
-            throw new OneDriveException("API - response could not be processed", e);
-        }
-//
-//        for (OneDrive drive : delta) {
-//            ((ConcreteOneDrive)drive).setApi(this);
-//        }
-
-        return delta;
-    }
-
 
     @Override
     public OneDrive getDefaultDrive() throws IOException, OneDriveException {
@@ -472,40 +451,6 @@ public class ConcreteOneDriveSDK implements OneDriveSDK {
             }
             createdFolder.setApi(this);
             return createdFolder;
-        } else {
-            throw new OneDriveException(response.toString());
-        }
-
-    }
-
-    /** PIYUSH BAJAJ
-     * Create a new folder in OneDrive and define the behavior on folder name conflict.
-     *
-     * @return OneFolder the newly created folder
-     * @throws IOException
-     * @throws OneDriveException
-     */
-    public OneFolder createSubscription() throws IOException, OneDriveException {
-        String requestURL = String.format("subscriptions");
-
-        String createSubscriptionJson = "{\"changeType\": \"updated\", " +
-                "\"notificationUrl\": \"http://localhost\", " +
-                "\"resource\": \"/Pictures/Screenshots\", " +
-                "\"expirationDateTime\": \"2022-01-01T11:23:00.000Z\", " +
-                "\"clientState\": \"client-specific string\" " +
-                "}";
-        System.out.println(createSubscriptionJson);
-        OneResponse response = makeRequest(requestURL, PreparedRequestMethod.POST, createSubscriptionJson);
-        System.out.println(response);
-        if (response.getStatusCode() == 201) {
-            ConcreteOneFolder createSubscription = null;
-            try {
-                createSubscription = ConcreteOneFolder.fromJSON(response.getBodyAsString());
-            } catch (ParseException e) {
-                throw new OneDriveException("API - response could not be processed", e);
-            }
-            createSubscription.setApi(this);
-            return createSubscription;
         } else {
             throw new OneDriveException(response.toString());
         }

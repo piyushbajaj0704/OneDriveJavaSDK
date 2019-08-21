@@ -166,9 +166,6 @@ public interface OneFolder {
      *
      * @return child count
      */
-
-    OneFolder createSubscription() throws IOException, OneDriveException;
-
     int getChildCount();
 
     /**

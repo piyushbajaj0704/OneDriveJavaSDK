@@ -6,6 +6,7 @@ package de.tuberlin.onedrivesdk.common;
 public enum OneDriveScope {
     SIGNIN("wl.signin"),
     OFFLINE_ACCESS("openid offline_access"),
+
     READONLY("onedrive.readonly"),
     READWRITE("onedrive.readwrite"),
     APPFOLDER("onedrive.appfolder");

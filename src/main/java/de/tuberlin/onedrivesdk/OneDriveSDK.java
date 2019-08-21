@@ -41,15 +41,6 @@ public interface OneDriveSDK {
      */
     List<OneDrive> getAllDrives() throws IOException, OneDriveException;
 
-    /** PIYUSH BAJAJ
-     * Gets all drives of the user.
-     *
-     * @return List<OneDrive>
-     * @throws IOException
-     * @throws OneDriveException
-     */
-    List<OneDrive> sync() throws IOException, OneDriveException;
-
     /**
      * Gets the root folder of the default drive.
      *
@@ -189,7 +180,7 @@ public interface OneDriveSDK {
     /**
      * used to start a thread that request a new authentication token
      *
-     * @see OneDriveSession#refreshDelay
+     * @see OneDriveSession
      * @see OneDriveSession#startRefreshThread()
      */
     void startSessionAutoRefresh();

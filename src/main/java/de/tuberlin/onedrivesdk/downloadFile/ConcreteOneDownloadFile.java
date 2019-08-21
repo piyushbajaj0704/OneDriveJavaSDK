@@ -37,7 +37,6 @@ public class ConcreteOneDownloadFile implements OneDownloadFile {
 
     @Override
     public void startDownload() throws IOException, OneDriveAuthenticationException {
-        System.out.println("Destination" + destinationFile);
         RandomAccessFile destination = new RandomAccessFile(this.destinationFile, "rw");
         try {
             logger.info("Starting download of "+metadata.getName());
